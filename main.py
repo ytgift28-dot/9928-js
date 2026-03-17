@@ -10,7 +10,7 @@ from telebot import types
 # ==========================================
 # ⚙️ CONFIGURATION
 # ==========================================
-API_TOKEN = '8621602769:AAHWHywjPO4ej7diKdv8TdPGdJ-TCbKSoxk' 
+API_TOKEN = '8621602769:AAH7YRhVVVp38Cm0cwe4PX16uYk0lqHgix0' 
 ADMIN_ID = 6941003064  
 CHANNEL_ID = '@SH_tricks' 
 CHANNEL_LINK = 'https://t.me/SH_tricks'
